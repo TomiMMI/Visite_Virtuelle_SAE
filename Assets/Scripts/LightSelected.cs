@@ -5,16 +5,17 @@ using UnityEngine;
 public class LightSelected : MonoBehaviour
 {
     [SerializeField]private GameObject lightVisual;
-    private FocusSelector parentSelector;
+    private User parentSelector;
     void Start()
     {
-        parentSelector = Camera.main.GetComponent<FocusSelector>();
+        parentSelector = Camera.main.GetComponent<User>();
         parentSelector.onSelectChange += ParentSelector_onSelectChange;
 
     }
 
-    private void ParentSelector_onSelectChange(object sender, FocusSelector.onSelectChangeEventArgs e)
+    private void ParentSelector_onSelectChange(object sender, User.onSelectChangeEventArgs e)
     {
+
         if (e.selection != null && e.selection == this.transform)
         {
             lightVisual.SetActive(true);

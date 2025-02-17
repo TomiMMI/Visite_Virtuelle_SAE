@@ -44,6 +44,15 @@ public partial class @LookMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""da8aa3dc-ec1f-4251-9a8d-c3a112d54239"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -79,6 +88,45 @@ public partial class @LookMap: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bab4e0ba-5216-4ae5-b784-8e24954e3027"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PauseMap"",
+            ""id"": ""65cb83d9-43d8-4da9-894b-2b873c4eb16c"",
+            ""actions"": [
+                {
+                    ""name"": ""Unpause"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e994fef-4d72-4d99-a400-bb8182f86866"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""918879a6-415a-4f36-b5ee-da5e60ce6ecc"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Unpause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -89,11 +137,16 @@ public partial class @LookMap: IInputActionCollection2, IDisposable
         m_ViewMap = asset.FindActionMap("ViewMap", throwIfNotFound: true);
         m_ViewMap_Look = m_ViewMap.FindAction("Look", throwIfNotFound: true);
         m_ViewMap_Interact = m_ViewMap.FindAction("Interact", throwIfNotFound: true);
+        m_ViewMap_Pause = m_ViewMap.FindAction("Pause", throwIfNotFound: true);
+        // PauseMap
+        m_PauseMap = asset.FindActionMap("PauseMap", throwIfNotFound: true);
+        m_PauseMap_Unpause = m_PauseMap.FindAction("Unpause", throwIfNotFound: true);
     }
 
     ~@LookMap()
     {
         UnityEngine.Debug.Assert(!m_ViewMap.enabled, "This will cause a leak and performance issues, LookMap.ViewMap.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_PauseMap.enabled, "This will cause a leak and performance issues, LookMap.PauseMap.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -157,12 +210,14 @@ public partial class @LookMap: IInputActionCollection2, IDisposable
     private List<IViewMapActions> m_ViewMapActionsCallbackInterfaces = new List<IViewMapActions>();
     private readonly InputAction m_ViewMap_Look;
     private readonly InputAction m_ViewMap_Interact;
+    private readonly InputAction m_ViewMap_Pause;
     public struct ViewMapActions
     {
         private @LookMap m_Wrapper;
         public ViewMapActions(@LookMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Look => m_Wrapper.m_ViewMap_Look;
         public InputAction @Interact => m_Wrapper.m_ViewMap_Interact;
+        public InputAction @Pause => m_Wrapper.m_ViewMap_Pause;
         public InputActionMap Get() { return m_Wrapper.m_ViewMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -178,6 +233,9 @@ public partial class @LookMap: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IViewMapActions instance)
@@ -188,6 +246,9 @@ public partial class @LookMap: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IViewMapActions instance)
@@ -205,9 +266,60 @@ public partial class @LookMap: IInputActionCollection2, IDisposable
         }
     }
     public ViewMapActions @ViewMap => new ViewMapActions(this);
+
+    // PauseMap
+    private readonly InputActionMap m_PauseMap;
+    private List<IPauseMapActions> m_PauseMapActionsCallbackInterfaces = new List<IPauseMapActions>();
+    private readonly InputAction m_PauseMap_Unpause;
+    public struct PauseMapActions
+    {
+        private @LookMap m_Wrapper;
+        public PauseMapActions(@LookMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Unpause => m_Wrapper.m_PauseMap_Unpause;
+        public InputActionMap Get() { return m_Wrapper.m_PauseMap; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PauseMapActions set) { return set.Get(); }
+        public void AddCallbacks(IPauseMapActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PauseMapActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PauseMapActionsCallbackInterfaces.Add(instance);
+            @Unpause.started += instance.OnUnpause;
+            @Unpause.performed += instance.OnUnpause;
+            @Unpause.canceled += instance.OnUnpause;
+        }
+
+        private void UnregisterCallbacks(IPauseMapActions instance)
+        {
+            @Unpause.started -= instance.OnUnpause;
+            @Unpause.performed -= instance.OnUnpause;
+            @Unpause.canceled -= instance.OnUnpause;
+        }
+
+        public void RemoveCallbacks(IPauseMapActions instance)
+        {
+            if (m_Wrapper.m_PauseMapActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPauseMapActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PauseMapActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PauseMapActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PauseMapActions @PauseMap => new PauseMapActions(this);
     public interface IViewMapActions
     {
         void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+    }
+    public interface IPauseMapActions
+    {
+        void OnUnpause(InputAction.CallbackContext context);
     }
 }

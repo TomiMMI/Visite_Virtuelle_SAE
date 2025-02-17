@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class FocusSelector : MonoBehaviour
+public class User : MonoBehaviour
 {
     private LookMap inputActions;
     public event EventHandler<onSelectChangeEventArgs> onSelectChange;
@@ -15,7 +15,7 @@ public class FocusSelector : MonoBehaviour
     [SerializeField] private LayerMask layer;
     private Transform lastSelected = null;
 
-    private void Start()
+    private void Awake()
     {
         inputActions = new LookMap();
         inputActions.Enable();
@@ -43,5 +43,15 @@ public class FocusSelector : MonoBehaviour
                 selection = lastSelected
             });
         }
+    }
+    private void Pause()
+    {
+        inputActions.ViewMap.Disable();
+        inputActions.PauseMap.Enable();
+
+    }
+    public LookMap GetInputActions()
+    {
+        return inputActions;
     }
 }
