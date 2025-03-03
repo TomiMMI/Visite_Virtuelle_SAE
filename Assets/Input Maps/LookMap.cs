@@ -70,7 +70,7 @@ public partial class @LookMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6c110710-f08b-4a21-8f28-26646ebef9a6"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

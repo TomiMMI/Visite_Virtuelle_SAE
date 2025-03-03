@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b424722c3f5970b4d9c811ba7bf898b2, type: 3}
+  m_Name: Shrek
+  m_EditorClassIdentifier: 
+  nom: Shrek
+  model: {fileID: 7137593312883821647, guid: e5e4125b0c1b8384e8092df8889206fa, type: 3}
+  description: Qu'est ce que vous faites dans mon marais ?
