@@ -28,7 +28,7 @@ public class UITransitionManager : MonoBehaviour
     }
     public void GeneratePage(Object objet)
     {
-        conteneurObjet.transform.eulerAngles = new Vector3(0,90,0);
+        conteneurObjet.transform.eulerAngles = new Vector3(0,-90,0);
         if (actualObject != null)
         {
             Object.Destroy(actualObject);

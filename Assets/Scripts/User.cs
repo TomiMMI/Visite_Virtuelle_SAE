@@ -30,6 +30,20 @@ public class User : MonoBehaviour
             lastSelected.GetComponent<SphereTransition>().Transit();
             lastSelected = null;
         }
+        else
+        {
+            Touch touch = Input.GetTouch(0);
+            var ray = Camera.main.ScreenPointToRay(touch.position);
+
+            RaycastHit hit = new RaycastHit();
+
+            if(Physics.Raycast(ray, out hit, layer))
+            {
+                hit.collider.gameObject.GetComponent<SphereTransition>().Transit();
+                lastSelected.GetComponent<LightSelected>().enabled = false;
+                lastSelected = null;
+            }
+        }
     }
 
     private void Update()

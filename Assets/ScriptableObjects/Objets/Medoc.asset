@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b424722c3f5970b4d9c811ba7bf898b2, type: 3}
+  m_Name: Medoc
+  m_EditorClassIdentifier: 
+  nom: Medicaments
+  model: {fileID: 6109093694790253656, guid: 21258ee07b713ba44a1443045c48c744, type: 3}
+  description: "Les m\xE9dicaments, de tous types, sont un des fondements de notre
+    syst\xE8me de sant\xE9.\n\nAntibiotique, antifongique, anticoagulant... il y
+    a un m\xE9dicament pour chaque besoin.\n\nPharminnov est la pour r\xE9pondre
+    \xE0 tous vos besoins en termes de m\xE9dicaments."

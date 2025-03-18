@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b424722c3f5970b4d9c811ba7bf898b2, type: 3}
   m_Name: Television
   m_EditorClassIdentifier: 
-  nom: "T\xE9l\xE9vision"
+  nom: Television
   model: {fileID: 1369154713894724280, guid: 48139e297ee432e4695e367b5c54fd19, type: 3}
-  description: "Objet de grande technologie qui permet, entre autres, de regarder
-    Touche pas \xE0 mon poste (plus maintenant du coup mdr)"
+  description: Objet de grande technologie qui permet, entre autres, de regarder
+    ARTE

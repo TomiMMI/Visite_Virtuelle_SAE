@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b424722c3f5970b4d9c811ba7bf898b2, type: 3}
+  m_Name: Gel
+  m_EditorClassIdentifier: 
+  nom: Gel hydroalcoolique
+  model: {fileID: 9131550495557278370, guid: 7ca921811b840d841a0d92de8beed39a, type: 3}
+  description: "Le gel hydroalcoolique est une solution a base d'eau et d'alcool
+    pour d\xE9sinfecter les mains, et tuer les bact\xE9ries.\n\nProfessionnels de
+    sant\xE9 comme public a tout int\xE9r\xEAt \xE0 toujours avoir une bouteille
+    pr\xE8s de soi, pour pouvoir se nettoyer les mains, et limiter les maladies."
